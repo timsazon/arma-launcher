@@ -190,6 +190,24 @@ namespace arma_launcher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ArmA 3 Directory.
+        /// </summary>
+        public static string ArmA3Directory {
+            get {
+                return ResourceManager.GetString("ArmA3Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ArmA 3 Mods Directory.
+        /// </summary>
+        public static string ArmA3ModsDirectory {
+            get {
+                return ResourceManager.GetString("ArmA3ModsDirectory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -267,6 +285,15 @@ namespace arma_launcher.Properties {
         public static string Play {
             get {
                 return ResourceManager.GetString("Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         

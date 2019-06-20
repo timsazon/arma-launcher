@@ -205,4 +205,13 @@
   <data name="_9" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\backgrounds\9.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ArmA3Directory" xml:space="preserve">
+    <value>ArmA 3 Directory</value>
+  </data>
+  <data name="ArmA3ModsDirectory" xml:space="preserve">
+    <value>ArmA 3 Mods Directory</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

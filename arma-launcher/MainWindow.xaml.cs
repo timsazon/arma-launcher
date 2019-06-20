@@ -9,10 +9,9 @@ using System.Windows;
 using System.Windows.Shell;
 using arma_launcher.ModService;
 using arma_launcher.ModService.Impl;
+using arma_launcher.Properties;
 using MaterialDesignThemes.Wpf;
 using NLog;
-using NuGet;
-using Settings = arma_launcher.Properties.Settings;
 
 namespace arma_launcher
 {
@@ -40,11 +39,12 @@ namespace arma_launcher
         private Progress<ProgressMessage> ShowProgress()
         {
             PlayButton.IsEnabled = false;
+            SettingsButton.IsEnabled = false;
 
             ValidateFull.Visibility = Visibility.Hidden;
             ValidateButton.Visibility = Visibility.Hidden;
 
-            ProgressBarTotal.Margin = new Thickness(20, 0, 70, 40);
+            ProgressBarTotal.Margin = new Thickness(20, 0, 80, 40);
             ProgressBarTotal.Height = 80;
             ProgressBarTotal.Visibility = Visibility.Visible;
 
@@ -66,7 +66,7 @@ namespace arma_launcher
                 {
                     TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
                     TaskbarItemInfo.ProgressValue = v.TotalProgress / 100.0;
-                    ProgressBarTotal.Margin = new Thickness(20, 0, 70, 50);
+                    ProgressBarTotal.Margin = new Thickness(20, 0, 80, 50);
                     ProgressBarTotal.IsIndeterminate = false;
                     ProgressBarTotal.Height = 70;
                     ProgressBarTotal.Value = v.TotalProgress;
@@ -108,6 +108,7 @@ namespace arma_launcher
             ValidateButton.Visibility = Visibility.Visible;
 
             PlayButton.IsEnabled = true;
+            SettingsButton.IsEnabled = true;
         }
 
         private async void ValidateButton_Click(object sender, RoutedEventArgs e)
@@ -119,9 +120,9 @@ namespace arma_launcher
                 _validationInfo = await Task.Run(() => _modService.Validate(full, progress));
                 HideProgress();
 
-                if (_validationInfo.newFiles.IsEmpty() &&
-                    _validationInfo.updateFiles.IsEmpty() &&
-                    _validationInfo.deleteFiles.IsEmpty())
+                if (!_validationInfo.newFiles.Any() &&
+                    !_validationInfo.updateFiles.Any() &&
+                    !_validationInfo.deleteFiles.Any())
                 {
                     Snackbar.MessageQueue.Enqueue(Properties.Resources.NoUpdateRequired);
                     return;
@@ -180,15 +181,25 @@ namespace arma_launcher
             {
                 var workshopMods = Settings.Default.A3WorkshopMods.Split(';');
                 var mods = Settings.Default.A3Mods.Split(';').Select(mod =>
-                    workshopMods.Contains(mod)
-                        ? Path.Combine(Settings.Default.A3ModsPath, "!Workshop", mod)
-                        : Path.Combine(Settings.Default.A3ModsPath, mod))
+                        workshopMods.Contains(mod)
+                            ? Path.Combine(Settings.Default.A3ModsPath, "!Workshop", mod)
+                            : Path.Combine(Settings.Default.A3ModsPath, mod))
                     .ToList();
 
                 var a3Exe = Path.Combine(Settings.Default.A3Path, "arma3battleye.exe");
+
                 var args = "";
-                if (mods.Any()) args += $"-mod={string.Join(";", mods)}";
-                var proc = Process.Start(a3Exe, args);
+
+                if (Settings.Default.WindowFlag) args += " -window";
+                if (Settings.Default.NoSplashFlag) args += " -noSplash";
+                if (Settings.Default.SkipIntroFlag) args += " -skipIntro";
+                if (Settings.Default.NoLogsFlag) args += " -noLogs";
+                if (Settings.Default.EnableHTFlag) args += " -enableHT";
+                if (Settings.Default.HugePagesFlag) args += " -hugepages";
+
+                if (mods.Any()) args += $" -mod={string.Join(";", mods)}";
+
+                Process.Start(a3Exe, args);
 
                 WindowState = WindowState.Minimized;
             }
@@ -197,6 +208,12 @@ namespace arma_launcher
                 Snackbar.MessageQueue.Enqueue(Properties.Resources.Error);
                 Logger.Error(ex, "Launch Exception");
             }
+        }
+
+        private async void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            await DialogHost.Show(new SettingsDialog(),
+                delegate(object _, DialogOpenedEventArgs args) { Settings.Default.Save(); });
         }
     }
 }

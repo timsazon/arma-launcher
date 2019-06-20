@@ -63,7 +63,7 @@
                     Value="-1"
                     Height="80"
                     IsIndeterminate="True"
-                    Margin="20,0,70,40"
+                    Margin="20,0,80,40"
                     VerticalAlignment="Bottom"
                     Visibility="Hidden"
                     materialDesign:TransitionAssist.DisableTransitions="True" />
@@ -72,7 +72,7 @@
                     Name="ProgressBar"
                     Value="0"
                     Height="10"
-                    Margin="20,0,70,40"
+                    Margin="20,0,80,40"
                     VerticalAlignment="Bottom"
                     Visibility="Hidden"
                     materialDesign:TransitionAssist.DisableTransitions="True" />
@@ -84,26 +84,40 @@
                 <Button
                     Grid.Row="2" Grid.Column="0"
                     Name="DownloadCancelButton"
-                    Margin="20,0,20,60"
+                    Margin="20,0,20,50"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                     Visibility="Hidden"
                     ToolTip="{x:Static p:Resources.StopDownloadTooltip}"
                     Click="DownloadCancelButton_Click">
                     <materialDesign:PackIcon
-                        Kind="Clear"
-                        Height="20"
-                        Width="20" />
+                        Kind="Close"
+                        Height="24"
+                        Width="24" />
+                </Button>
+                <Button
+                    Grid.Row="2" Grid.Column="2"
+                    Name="SettingsButton"
+                    Margin="20,0,20,50"
+                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                    Style="{StaticResource MaterialDesignToolForegroundButton}"
+                    Click="SettingsButton_Click"
+                    materialDesign:RippleAssist.IsDisabled="True"
+                    Height="40" Width="40">
+                    <materialDesign:PackIcon
+                        Kind="Settings"
+                        Height="30"
+                        Width="30" />
                 </Button>
                 <Button
                     Grid.Row="2" Grid.Column="2"
                     Name="PlayButton"
-                    Margin="20,0,20,20"
+                    Margin="80,0,20,20"
                     VerticalAlignment="Bottom" HorizontalAlignment="Right"
                     FontWeight="Bold" FontSize="48"
                     MinWidth="320" MinHeight="100" Width="320" Height="100"
                     Content="{x:Static p:Resources.Play}"
-                    Click="PlayButton_Click"/>
+                    Click="PlayButton_Click" />
             </Grid>
             <materialDesign:Snackbar
                 MessageQueue="{materialDesign:MessageQueue}"

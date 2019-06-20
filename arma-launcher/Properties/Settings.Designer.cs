@@ -136,5 +136,77 @@ namespace arma_launcher.Properties {
                 this["A3Mods"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool NoSplashFlag {
+            get {
+                return ((bool)(this["NoSplashFlag"]));
+            }
+            set {
+                this["NoSplashFlag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SkipIntroFlag {
+            get {
+                return ((bool)(this["SkipIntroFlag"]));
+            }
+            set {
+                this["SkipIntroFlag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NoLogsFlag {
+            get {
+                return ((bool)(this["NoLogsFlag"]));
+            }
+            set {
+                this["NoLogsFlag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableHTFlag {
+            get {
+                return ((bool)(this["EnableHTFlag"]));
+            }
+            set {
+                this["EnableHTFlag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool HugePagesFlag {
+            get {
+                return ((bool)(this["HugePagesFlag"]));
+            }
+            set {
+                this["HugePagesFlag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool WindowFlag {
+            get {
+                return ((bool)(this["WindowFlag"]));
+            }
+            set {
+                this["WindowFlag"] = value;
+            }
+        }
     }
 }
