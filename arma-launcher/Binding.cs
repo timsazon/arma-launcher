@@ -1,10 +1,11 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using System.Windows.Media;
 
 namespace arma_launcher
 {
-    public static class BackgroundImage
+    public static class Binding
     {
         private static readonly Random Random = new Random();
 
@@ -17,5 +18,7 @@ namespace arma_launcher
                 return new ImageSourceConverter().ConvertFromString(path) as ImageSource;
             }
         }
+
+        public static string GetTitle => Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title;
     }
 }
