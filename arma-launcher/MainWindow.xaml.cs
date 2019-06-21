@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,6 +12,7 @@ using arma_launcher.ModService.Impl;
 using arma_launcher.Properties;
 using MaterialDesignThemes.Wpf;
 using NLog;
+using Squirrel;
 
 namespace arma_launcher
 {
@@ -32,6 +32,15 @@ namespace arma_launcher
 
         public MainWindow()
         {
+            Initialized += async delegate
+            {
+                if (Settings.Default.UpdateUrl.Length <= 0) return;
+                using (var mgr = await UpdateManager.GitHubUpdateManager(Settings.Default.UpdateUrl))
+                {
+                    await mgr.UpdateApp();
+                }
+            };
+
             InitializeComponent();
 
             _modService = new FtpModService();
