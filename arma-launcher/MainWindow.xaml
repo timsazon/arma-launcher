@@ -20,7 +20,7 @@
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo />
     </Window.TaskbarItemInfo>
-    <materialDesign:DialogHost>
+    <materialDesign:DialogHost materialDesign:TransitionAssist.DisableTransitions="True">
         <Grid>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="0,0" MappingMode="RelativeToBoundingBox">

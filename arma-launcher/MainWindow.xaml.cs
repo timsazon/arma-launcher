@@ -207,7 +207,7 @@ namespace arma_launcher
                 if (Settings.Default.EnableHTFlag) args += " -enableHT";
                 if (Settings.Default.HugePagesFlag) args += " -hugepages";
 
-                if (mods.Any()) args += $" -mod={string.Join(";", mods)}";
+                if (mods.Any()) args += $" -mod=\"{string.Join(";", mods)}\"";
 
                 Process.Start(a3Exe, args);
 
