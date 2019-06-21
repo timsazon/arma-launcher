@@ -12,6 +12,8 @@ using System.Xml;
 using arma_launcher.Properties;
 using FluentFTP;
 using Newtonsoft.Json;
+using NLog;
+using Polly;
 using SharpCompress.Archives;
 using SharpCompress.Archives.SevenZip;
 using SharpCompress.Readers;
@@ -20,6 +22,8 @@ namespace arma_launcher.ModService.Impl
 {
     internal class FtpModService : IModService
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
         private readonly NetworkCredential _networkCredential;
         private FtpClient _client;
 
@@ -80,16 +84,25 @@ namespace arma_launcher.ModService.Impl
         public async Task Download(IEnumerable<Addon> downloadFiles, IProgress<ProgressMessage> progress,
             CancellationToken cancellation)
         {
+            var policy = Policy.Handle<Exception>().WaitAndRetryAsync(
+                3,
+                retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                (exception, calculatedWaitDuration) => { Logger.Error(exception, "Download"); }
+            );
+
             using (_client = new FtpClient(Settings.Default.FtpHost, _networkCredential))
             {
-                await _client.SetWorkingDirectoryAsync(Settings.Default.FtpPath, cancellation);
-
                 var totalProgress = 0.0;
                 var totalSize = downloadFiles.Sum(a => a.Size);
+
+                var unpackTasks = new List<Task>();
 
                 foreach (var addon in downloadFiles)
                 {
                     var path = Path.Combine(Settings.Default.A3ModsPath, addon.Url);
+                    var remotePath = Path.Combine(Settings.Default.FtpPath, addon.Url);
+
+                    File.Delete(path);
 
                     var total = totalProgress;
                     var ftpProgress = new Progress<FtpProgress>(v =>
@@ -102,19 +115,24 @@ namespace arma_launcher.ModService.Impl
                                 addon.Pbo));
                     });
 
-                    await _client.DownloadFileAsync(
-                        path,
-                        addon.Url,
-                        FtpLocalExists.Overwrite,
-                        FtpVerify.None,
-                        ftpProgress,
-                        cancellation
-                    );
+                    await policy.ExecuteAsync(async token =>
+                    {
+                        await _client.DownloadFileAsync(
+                            path,
+                            remotePath,
+                            FtpLocalExists.Append,
+                            FtpVerify.None,
+                            ftpProgress,
+                            token
+                        );
+                    }, cancellation);
 
                     totalProgress += (double) addon.Size / totalSize * 100.0;
 
-                    _ = Task.Run(() => UnpackFile(path), cancellation);
+                    unpackTasks.Add(Task.Run(() => UnpackFile(path), cancellation));
                 }
+
+                await Task.WhenAll(unpackTasks);
             }
         }
 
