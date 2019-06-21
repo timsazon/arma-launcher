@@ -60,7 +60,7 @@
       <Value Profile="(Default)">https://github.com/michail-nikolaev/task-force-arma-3-radio/releases/download/0.9.12/task_force_radio.ts3_plugin</Value>
     </Setting>
     <Setting Name="TeamSpeakServer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">ts3server://ts.squadgames.ru/</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -231,7 +231,7 @@ namespace arma_launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("ts3server://ts.squadgames.ru/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string TeamSpeakServer {
             get {
                 return ((string)(this["TeamSpeakServer"]));
