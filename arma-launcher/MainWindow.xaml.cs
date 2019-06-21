@@ -35,9 +35,20 @@ namespace arma_launcher
             Initialized += async delegate
             {
                 if (Settings.Default.UpdateUrl.Length <= 0) return;
-                using (var mgr = await UpdateManager.GitHubUpdateManager(Settings.Default.UpdateUrl))
+
+                try
                 {
-                    await mgr.UpdateApp();
+                    await Task.Run(async () =>
+                    {
+                        using (var mgr = await UpdateManager.GitHubUpdateManager(Settings.Default.UpdateUrl))
+                        {
+                            await mgr.UpdateApp();
+                        }
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Logger.Error(ex, "Update");
                 }
             };
 
