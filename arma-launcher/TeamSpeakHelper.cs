@@ -86,10 +86,10 @@ namespace arma_launcher
                 {
                     var tsRegKey = Registry.LocalMachine.OpenSubKey(@"Software\TeamSpeak 3 Client");
 
-                    if (tsRegKey == null)
+                    if (tsRegKey?.GetValue("") == null)
                     {
                         tsRegKey = Registry.CurrentUser.OpenSubKey(@"Software\TeamSpeak 3 Client");
-                        if (tsRegKey == null) return null;
+                        if (tsRegKey?.GetValue("") == null) return null;
                     }
 
                     var teamSpeakPath = tsRegKey.GetValue("").ToString();
