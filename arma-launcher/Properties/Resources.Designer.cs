@@ -262,6 +262,33 @@ namespace arma_launcher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installer will be downloaded in background then installation begins.
+        /// </summary>
+        public static string InstallerDownloading {
+            get {
+                return ResourceManager.GetString("InstallerDownloading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install TaskForceRadio plugin? This is required for a VOIP system.
+        /// </summary>
+        public static string InstallPlugin {
+            get {
+                return ResourceManager.GetString("InstallPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install TeamSpeak 3?.
+        /// </summary>
+        public static string InstallTS {
+            get {
+                return ResourceManager.GetString("InstallTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string NewFiles {

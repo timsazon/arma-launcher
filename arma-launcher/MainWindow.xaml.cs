@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -182,7 +183,7 @@ namespace arma_launcher
                 var workshopMods = Settings.Default.A3WorkshopMods.Split(';');
                 var mods = Settings.Default.A3Mods.Split(';').Select(mod =>
                         workshopMods.Contains(mod)
-                            ? Path.Combine(Settings.Default.A3ModsPath, "!Workshop", mod)
+                            ? Path.Combine(Settings.Default.A3Path, "!Workshop", mod)
                             : Path.Combine(Settings.Default.A3ModsPath, mod))
                     .ToList();
 
@@ -213,7 +214,28 @@ namespace arma_launcher
         private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             await DialogHost.Show(new SettingsDialog(),
-                delegate(object _, DialogOpenedEventArgs args) { Settings.Default.Save(); });
+                delegate(object _, DialogClosingEventArgs args) { Settings.Default.Save(); });
+        }
+
+        private async void TeamSpeakButton_Click(object sender, RoutedEventArgs e)
+        {
+            TeamSpeakButton.IsHitTestVisible = false;
+            TeamSpeakButton.SetCurrentValue(ButtonProgressAssist.IsIndicatorVisibleProperty, true);
+            TeamSpeakButton.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, true);
+            TeamSpeakButton.SetCurrentValue(ButtonProgressAssist.ValueProperty, -1.0);
+
+            try
+            {
+                await TeamSpeakHelper.CheckAndInstall(TeamSpeakButton);
+            }
+            catch (Exception ex)
+            {
+                Snackbar.MessageQueue.Enqueue(Properties.Resources.Error);
+                Logger.Error(ex, "TeamSpeak");
+            }
+
+            TeamSpeakButton.SetCurrentValue(ButtonProgressAssist.IsIndicatorVisibleProperty, false);
+            TeamSpeakButton.IsHitTestVisible = true;
         }
     }
 }

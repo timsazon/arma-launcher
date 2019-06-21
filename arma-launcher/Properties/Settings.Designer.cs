@@ -67,7 +67,7 @@ namespace arma_launcher.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("arma-launcher")]
+        [global::System.Configuration.DefaultSettingValueAttribute("arma_launcher")]
         public string LocalFolder {
             get {
                 return ((string)(this["LocalFolder"]));
@@ -206,6 +206,38 @@ namespace arma_launcher.Properties {
             }
             set {
                 this["WindowFlag"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://files.teamspeak-services.com/releases/client/3.3.0/TeamSpeak3-Client-win6" +
+            "4-3.3.0.exe")]
+        public string TeamSpeakUrl {
+            get {
+                return ((string)(this["TeamSpeakUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/michail-nikolaev/task-force-arma-3-radio/releases/download/0.9" +
+            ".12/task_force_radio.ts3_plugin")]
+        public string TaskForcePluginUrl {
+            get {
+                return ((string)(this["TaskForcePluginUrl"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ts3server://ts.squadgames.ru/")]
+        public string TeamSpeakServer {
+            get {
+                return ((string)(this["TeamSpeakServer"]));
+            }
+            set {
+                this["TeamSpeakServer"] = value;
             }
         }
     }

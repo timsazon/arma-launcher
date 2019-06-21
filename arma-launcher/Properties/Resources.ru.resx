@@ -214,4 +214,13 @@
   <data name="Settings" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="InstallerDownloading" xml:space="preserve">
+    <value>Установщик будет загружен в фоне и затем запущен</value>
+  </data>
+  <data name="InstallPlugin" xml:space="preserve">
+    <value>Установить TaskForceRadio плагин? Он требуется для работы голосовой связи</value>
+  </data>
+  <data name="InstallTS" xml:space="preserve">
+    <value>Установить TeamSpeak 3?</value>
+  </data>
 </root>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
-        TextElement.FontSize="13"
+        TextElement.FontSize="14"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
@@ -45,7 +45,7 @@
                     Margin="20,0,0,130"
                     VerticalAlignment="Bottom" HorizontalAlignment="Left"
                     Style="{StaticResource MaterialDesignCheckBox}"
-                    ToolTip="{x:Static p:Resources.ValidateFullTooltip}" FontSize="14"
+                    ToolTip="{x:Static p:Resources.ValidateFullTooltip}"
                     Content="{x:Static p:Resources.ValidateFull}" />
                 <Button
                     Grid.Row="2" Grid.Column="0"
@@ -118,6 +118,18 @@
                     MinWidth="320" MinHeight="100" Width="320" Height="100"
                     Content="{x:Static p:Resources.Play}"
                     Click="PlayButton_Click" />
+                <Button
+                    Grid.Row="0" Grid.Column="2"
+                    Name="TeamSpeakButton"
+                    Margin="0,20,20,0"
+                    VerticalAlignment="Top" HorizontalAlignment="Right"
+                    Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                    FontSize="48" Click="TeamSpeakButton_Click">
+                    <materialDesign:PackIcon
+                        Kind="HeadsetMic"
+                        Height="32"
+                        Width="32" />
+                </Button>
             </Grid>
             <materialDesign:Snackbar
                 MessageQueue="{materialDesign:MessageQueue}"

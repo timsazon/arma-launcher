@@ -15,7 +15,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LocalFolder" Type="System.String" Scope="User">
-      <Value Profile="(Default)">arma-launcher</Value>
+      <Value Profile="(Default)">arma_launcher</Value>
     </Setting>
     <Setting Name="FtpHost" Type="System.String" Scope="Application">
       <Value Profile="(Default)" />
@@ -52,6 +52,15 @@
     </Setting>
     <Setting Name="WindowFlag" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="TeamSpeakUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://files.teamspeak-services.com/releases/client/3.3.0/TeamSpeak3-Client-win64-3.3.0.exe</Value>
+    </Setting>
+    <Setting Name="TaskForcePluginUrl" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://github.com/michail-nikolaev/task-force-arma-3-radio/releases/download/0.9.12/task_force_radio.ts3_plugin</Value>
+    </Setting>
+    <Setting Name="TeamSpeakServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ts3server://ts.squadgames.ru/</Value>
     </Setting>
   </Settings>
 </SettingsFile>

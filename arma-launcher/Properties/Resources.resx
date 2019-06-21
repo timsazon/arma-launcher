@@ -214,4 +214,13 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="InstallerDownloading" xml:space="preserve">
+    <value>Installer will be downloaded in background then installation begins</value>
+  </data>
+  <data name="InstallPlugin" xml:space="preserve">
+    <value>Install TaskForceRadio plugin? This is required for a VOIP system</value>
+  </data>
+  <data name="InstallTS" xml:space="preserve">
+    <value>Install TeamSpeak 3?</value>
+  </data>
 </root>
