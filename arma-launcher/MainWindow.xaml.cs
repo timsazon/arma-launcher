@@ -164,8 +164,8 @@ namespace arma_launcher
             }
             catch (Exception ex)
             {
-                Snackbar.MessageQueue.Enqueue(Properties.Resources.Error);
-                Logger.Error(ex, "Validate Exception");
+                Snackbar.MessageQueue.Enqueue($"{Properties.Resources.Error}: {ex.Message}");
+                Logger.Error(ex, "Validate");
                 HideProgress();
             }
         }
@@ -192,8 +192,8 @@ namespace arma_launcher
             {
                 if (!_cancellationTokenSource.IsCancellationRequested)
                 {
-                    Snackbar.MessageQueue.Enqueue(Properties.Resources.Error);
-                    Logger.Error(ex, "Download Exception");
+                    Snackbar.MessageQueue.Enqueue($"{Properties.Resources.Error}: {ex.Message}");
+                    Logger.Error(ex, "Download");
                 }
             }
             finally
@@ -237,8 +237,8 @@ namespace arma_launcher
             }
             catch (Exception ex)
             {
-                Snackbar.MessageQueue.Enqueue(Properties.Resources.Error);
-                Logger.Error(ex, "Launch Exception");
+                Snackbar.MessageQueue.Enqueue($"{Properties.Resources.Error}: {ex.Message}");
+                Logger.Error(ex, "Launch");
             }
         }
 
@@ -261,7 +261,7 @@ namespace arma_launcher
             }
             catch (Exception ex)
             {
-                Snackbar.MessageQueue.Enqueue(Properties.Resources.Error);
+                Snackbar.MessageQueue.Enqueue($"{Properties.Resources.Error}: {ex.Message}");
                 Logger.Error(ex, "TeamSpeak");
             }
 
