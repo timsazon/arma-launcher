@@ -14,6 +14,7 @@ using FluentFTP;
 using Newtonsoft.Json;
 using NLog;
 using Polly;
+using Polly.CircuitBreaker;
 using SharpCompress.Archives;
 using SharpCompress.Archives.SevenZip;
 using SharpCompress.Readers;
@@ -84,10 +85,16 @@ namespace arma_launcher.ModService.Impl
         public async Task Download(IEnumerable<Addon> downloadFiles, IProgress<ProgressMessage> progress,
             CancellationToken cancellation)
         {
-            var policy = Policy.Handle<Exception>().WaitAndRetryAsync(
+            var circuitBreakerPolicy = Policy.Handle<Exception>().AdvancedCircuitBreakerAsync(
+                1,
+                TimeSpan.FromSeconds(10),
                 3,
-                retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                (exception, calculatedWaitDuration) => { Logger.Error(exception, "Download"); }
+                TimeSpan.FromSeconds(1)
+            );
+
+            var retryPolicy = Policy.Handle<Exception>(e => !(e is BrokenCircuitException)).WaitAndRetryForeverAsync(
+                retryAttempt => TimeSpan.FromSeconds(2),
+                (exception, _) => Logger.Error(exception, "Download")
             );
 
             using (_client = new FtpClient(Settings.Default.FtpHost, _networkCredential))
@@ -115,17 +122,19 @@ namespace arma_launcher.ModService.Impl
                                 addon.Pbo));
                     });
 
-                    await policy.ExecuteAsync(async token =>
-                    {
-                        await _client.DownloadFileAsync(
-                            path,
-                            remotePath,
-                            FtpLocalExists.Append,
-                            FtpVerify.None,
-                            ftpProgress,
-                            token
-                        );
-                    }, cancellation);
+                    await retryPolicy
+                        .WrapAsync(circuitBreakerPolicy)
+                        .ExecuteAsync(async token =>
+                        {
+                            await _client.DownloadFileAsync(
+                                path,
+                                remotePath,
+                                FtpLocalExists.Append,
+                                FtpVerify.None,
+                                ftpProgress,
+                                token
+                            );
+                        }, cancellation);
 
                     totalProgress += (double) addon.Size / totalSize * 100.0;
 
