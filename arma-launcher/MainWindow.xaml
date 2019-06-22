@@ -31,105 +31,122 @@
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-                <CheckBox
-                    Grid.Row="2" Grid.Column="0"
-                    Name="ValidateFull"
-                    Margin="20,0,0,130"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                    Style="{StaticResource MaterialDesignCheckBox}"
-                    ToolTip="{x:Static p:Resources.ValidateFullTooltip}"
-                    Content="{x:Static p:Resources.ValidateFull}" />
-                <Button
-                    Grid.Row="2" Grid.Column="0"
-                    Name="ValidateButton"
-                    Margin="20,0,0,20"
-                    Background="#00000000"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                    FontWeight="Bold" FontSize="48"
-                    MinWidth="320" MinHeight="100" Width="320" Height="100" Click="ValidateButton_Click"
-                    Visibility="Visible"
-                    Content="{x:Static p:Resources.Validate}" />
-                <ProgressBar
-                    Grid.Row="2" Grid.Column="0"
-                    Name="ProgressBarTotal"
-                    Value="-1"
-                    Height="80"
-                    IsIndeterminate="True"
-                    Margin="20,0,80,40"
-                    VerticalAlignment="Bottom"
-                    Visibility="Hidden"
-                    materialDesign:TransitionAssist.DisableTransitions="True" />
-                <ProgressBar
-                    Grid.Row="2" Grid.Column="0"
-                    Name="ProgressBar"
-                    Value="0"
-                    Height="10"
-                    Margin="20,0,80,40"
-                    VerticalAlignment="Bottom"
-                    Visibility="Hidden"
-                    materialDesign:TransitionAssist.DisableTransitions="True" />
-                <TextBlock
-                    Grid.Row="2" Grid.Column="0"
-                    Name="ProgressBarMessage"
-                    Margin="20,0,20,20"
-                    VerticalAlignment="Bottom" />
-                <Button
-                    Grid.Row="2" Grid.Column="0"
-                    Name="DownloadCancelButton"
-                    Margin="20,0,20,50"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
-                    Visibility="Hidden"
-                    ToolTip="{x:Static p:Resources.StopDownloadTooltip}"
-                    Click="DownloadCancelButton_Click">
-                    <materialDesign:PackIcon
-                        Kind="Close"
-                        Height="24"
-                        Width="24" />
-                </Button>
-                <Button
-                    Grid.Row="2" Grid.Column="2"
-                    Name="SettingsButton"
-                    Margin="20,0,20,50"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
-                    Style="{StaticResource MaterialDesignToolForegroundButton}"
-                    Click="SettingsButton_Click"
-                    materialDesign:RippleAssist.IsDisabled="True"
-                    Height="40" Width="40">
-                    <materialDesign:PackIcon
-                        Kind="Settings"
-                        Height="30"
-                        Width="30" />
-                </Button>
-                <Button
-                    Grid.Row="2" Grid.Column="2"
-                    Name="PlayButton"
-                    Margin="80,0,20,20"
-                    VerticalAlignment="Bottom" HorizontalAlignment="Right"
-                    FontWeight="Bold" FontSize="48"
-                    MinWidth="320" MinHeight="100" Width="320" Height="100"
-                    Content="{x:Static p:Resources.Play}"
-                    Click="PlayButton_Click" />
-                <Button
-                    Grid.Row="0" Grid.Column="2"
-                    Name="TeamSpeakButton"
-                    Margin="0,20,20,0"
-                    VerticalAlignment="Top" HorizontalAlignment="Right"
-                    Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                    FontSize="48" Click="TeamSpeakButton_Click">
-                    <materialDesign:PackIcon
-                        Kind="HeadsetMic"
-                        Height="32"
-                        Width="32" />
-                </Button>
+                <Grid
+                    Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel
+                        Grid.Column="1"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Margin="0,20,0,0">
+                        <local:ServerStatus
+                            Id="{Binding Source={x:Static p:Settings.Default}, Path=BMServerId}" />
+                    </StackPanel>
+                    <Button
+                        Grid.Column="2"
+                        Name="TeamSpeakButton"
+                        Margin="0,20,20,0"
+                        VerticalAlignment="Top" HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
+                        FontSize="48" Click="TeamSpeakButton_Click">
+                        <materialDesign:PackIcon
+                            Kind="HeadsetMic"
+                            Height="32"
+                            Width="32" />
+                    </Button>
+                </Grid>
+                <Grid
+                    Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <CheckBox
+                        Grid.Column="0"
+                        Name="ValidateFull"
+                        Margin="20,0,0,130"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        Style="{StaticResource MaterialDesignCheckBox}"
+                        ToolTip="{x:Static p:Resources.ValidateFullTooltip}"
+                        Content="{x:Static p:Resources.ValidateFull}" />
+                    <Button
+                        Grid.Column="0"
+                        Name="ValidateButton"
+                        Margin="20,0,0,20"
+                        Background="#00000000"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        FontWeight="Bold" FontSize="48"
+                        MinWidth="320" MinHeight="100" Width="320" Height="100" Click="ValidateButton_Click"
+                        Visibility="Visible"
+                        Content="{x:Static p:Resources.Validate}" />
+                    <ProgressBar
+                        Grid.Column="0"
+                        Name="ProgressBarTotal"
+                        Value="-1"
+                        Height="80"
+                        IsIndeterminate="True"
+                        Margin="20,0,80,40"
+                        VerticalAlignment="Bottom"
+                        Visibility="Hidden"
+                        materialDesign:TransitionAssist.DisableTransitions="True" />
+                    <ProgressBar
+                        Grid.Column="0"
+                        Name="ProgressBar"
+                        Value="0"
+                        Height="10"
+                        Margin="20,0,80,40"
+                        VerticalAlignment="Bottom"
+                        Visibility="Hidden"
+                        materialDesign:TransitionAssist.DisableTransitions="True" />
+                    <TextBlock
+                        Grid.Column="0"
+                        Name="ProgressBarMessage"
+                        Margin="20,0,20,20"
+                        VerticalAlignment="Bottom" />
+                    <Button
+                        Grid.Column="0"
+                        Name="DownloadCancelButton"
+                        Margin="20,0,20,50"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
+                        Visibility="Hidden"
+                        ToolTip="{x:Static p:Resources.StopDownloadTooltip}"
+                        Click="DownloadCancelButton_Click">
+                        <materialDesign:PackIcon
+                            Kind="Close"
+                            Height="24"
+                            Width="24" />
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Name="SettingsButton"
+                        Margin="20,0,20,50"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                        Style="{StaticResource MaterialDesignToolForegroundButton}"
+                        Click="SettingsButton_Click"
+                        materialDesign:RippleAssist.IsDisabled="True"
+                        Height="40" Width="40">
+                        <materialDesign:PackIcon
+                            Kind="Settings"
+                            Height="30"
+                            Width="30" />
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Name="PlayButton"
+                        Margin="80,0,20,20"
+                        VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                        FontWeight="Bold" FontSize="48"
+                        MinWidth="320" MinHeight="100" Width="320" Height="100"
+                        Content="{x:Static p:Resources.Play}"
+                        Click="PlayButton_Click" />
+                </Grid>
             </Grid>
             <materialDesign:Snackbar
                 MessageQueue="{materialDesign:MessageQueue}"

@@ -240,5 +240,32 @@ namespace arma_launcher.Properties {
                 this["TeamSpeakServer"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BMServerId {
+            get {
+                return ((string)(this["BMServerId"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BMToken {
+            get {
+                return ((string)(this["BMToken"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60000")]
+        public int BMRefreshTime {
+            get {
+                return ((int)(this["BMRefreshTime"]));
+            }
+        }
     }
 }

@@ -62,5 +62,14 @@
     <Setting Name="TeamSpeakServer" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="BMServerId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BMToken" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="BMRefreshTime" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">60000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
