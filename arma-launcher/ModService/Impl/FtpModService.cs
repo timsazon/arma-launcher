@@ -100,7 +100,7 @@ namespace arma_launcher.ModService.Impl
                 1,
                 TimeSpan.FromSeconds(10),
                 3,
-                TimeSpan.FromSeconds(1)
+                TimeSpan.MaxValue
             );
 
             var retryPolicy = Policy.Handle<Exception>(e => !(e is BrokenCircuitException)).WaitAndRetryForeverAsync(
