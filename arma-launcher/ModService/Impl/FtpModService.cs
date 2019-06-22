@@ -61,10 +61,21 @@ namespace arma_launcher.ModService.Impl
                 var updateFiles = new ConcurrentBag<Addon>();
                 var deleteFiles = new ConcurrentBag<Addon>();
 
+                var validationProgress = 0;
+
+                void ValidationProgressIncrement()
+                {
+                    progress.Report(new ProgressMessage(ProgressMessage.Status.Validating,
+                        (double) Interlocked.Increment(ref validationProgress) / addons.Count * 100.0));
+                }
+
                 var validationTasks = new List<Task>();
                 mods.ForEach(mod =>
                     validationTasks.Add(Task.Run(() =>
-                        ValidateMod(mod, addons, validFiles, updateFiles, deleteFiles, full, oldValid))));
+                        ValidateMod(
+                            mod, addons, ValidationProgressIncrement,
+                            validFiles, updateFiles, deleteFiles,
+                            full, oldValid))));
 
                 await Task.WhenAll(validationTasks);
 
@@ -156,7 +167,8 @@ namespace arma_launcher.ModService.Impl
             await Task.Run(() => UnpackFile(Path.Combine(Settings.Default.LocalFolder, "md5", "autoconfig.7z")));
         }
 
-        private static void ValidateMod(string mod, List<Addon> addons, ConcurrentBag<Addon> validFiles,
+        private static void ValidateMod(string mod, List<Addon> addons, Action progress,
+            ConcurrentBag<Addon> validFiles,
             ConcurrentBag<Addon> updateFiles, ConcurrentBag<Addon> deleteFiles, bool full = false,
             List<Addon> oldValid = default)
         {
@@ -187,6 +199,7 @@ namespace arma_launcher.ModService.Impl
                 if (Equals(remoteAddon, default(Addon)))
                 {
                     deleteFiles.Add(localAddon);
+                    progress();
                     return;
                 }
 
@@ -206,10 +219,12 @@ namespace arma_launcher.ModService.Impl
                 if (localAddon.Md5 == remoteAddon.Md5)
                 {
                     validFiles.Add(localAddon);
+                    progress();
                     return;
                 }
 
                 updateFiles.Add(localAddon);
+                progress();
             });
         }
 

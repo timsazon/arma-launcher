@@ -74,7 +74,7 @@ namespace arma_launcher
 
             return new Progress<ProgressMessage>(v =>
             {
-                if (v.Progress < 0)
+                if (v.TotalProgress < 0)
                 {
                     if (v.ProgressStatus != ProgressMessage.Status.Downloading)
                     {
@@ -85,14 +85,25 @@ namespace arma_launcher
                 }
                 else
                 {
-                    TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
-                    TaskbarItemInfo.ProgressValue = v.TotalProgress / 100.0;
-                    ProgressBarTotal.Margin = new Thickness(20, 0, 80, 50);
-                    ProgressBarTotal.IsIndeterminate = false;
-                    ProgressBarTotal.Height = 70;
-                    ProgressBarTotal.Value = v.TotalProgress;
-                    ProgressBar.Visibility = Visibility.Visible;
-                    ProgressBar.Value = v.Progress;
+                    if (v.ProgressStatus == ProgressMessage.Status.Downloading)
+                    {
+                        TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
+                        TaskbarItemInfo.ProgressValue = v.TotalProgress / 100.0;
+                        ProgressBarTotal.Margin = new Thickness(20, 0, 80, 50);
+                        ProgressBarTotal.IsIndeterminate = false;
+                        ProgressBarTotal.Height = 70;
+                        ProgressBarTotal.Value = v.TotalProgress;
+                        ProgressBar.Visibility = Visibility.Visible;
+                        ProgressBar.Value = v.Progress;
+                    }
+                    else
+                    {
+                        TaskbarItemInfo.ProgressState = TaskbarItemProgressState.Normal;
+                        TaskbarItemInfo.ProgressValue = v.TotalProgress / 100.0;
+                        ProgressBarTotal.IsIndeterminate = false;
+                        ProgressBarTotal.Value = v.TotalProgress;
+                        ProgressBar.Visibility = Visibility.Hidden;
+                    }
                 }
 
                 switch (v.ProgressStatus)
