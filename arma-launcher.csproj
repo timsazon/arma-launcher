@@ -6,16 +6,14 @@
     <RootNamespace>arma_launcher</RootNamespace>
     <UseWPF>true</UseWPF>
     <StartupObject>arma_launcher.App</StartupObject>
-	<RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
-	<Platforms>x64</Platforms>
-	<PackageId>solid-games-arma-launcher</PackageId>
-	<PackageIcon>logo_day.png</PackageIcon>
-	<Company>SolidGames</Company>
-	<Authors>https://github.com/timsazon</Authors>
-	<Product>SolidGames Launcher</Product>
-	<Copyright>https://github.com/timsazon</Copyright>
-	<AssemblyName>SolidGames Launcher</AssemblyName>
-	<ApplicationIcon></ApplicationIcon>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <Platforms>x64</Platforms>
+    <PackageId>arma-launcher</PackageId>
+    <Company>https://github.com/timsazon</Company>
+    <Authors>https://github.com/timsazon</Authors>
+    <Product>ArmA 3 Launcher</Product>
+    <Copyright>https://github.com/timsazon</Copyright>
+    <AssemblyName>ArmA 3 Launcher</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -65,9 +63,9 @@
   </ItemGroup>
 
   <ItemGroup>
-	<Content Include="Images\backgrounds\*.*">
-	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	</Content>
+    <Content Include="Images\backgrounds\*.*">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
