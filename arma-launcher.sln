@@ -1,31 +1,49 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
-VisualStudioVersion = 16.0.29001.49
+VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "arma-launcher", "arma-launcher\arma-launcher.csproj", "{EEA37ACF-60F8-4EEA-910B-38F01F50C287}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "arma-launcher", "arma-launcher.csproj", "{50F4E309-DF29-4B16-A120-271F1536900A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
 		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
 		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Debug|x64.ActiveCfg = Debug|x64
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Debug|x64.Build.0 = Debug|x64
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Release|x64.ActiveCfg = Release|x64
-		{EEA37ACF-60F8-4EEA-910B-38F01F50C287}.Release|x64.Build.0 = Release|x64
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|ARM.Build.0 = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|x64.ActiveCfg = Debug|x64
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|x64.Build.0 = Debug|x64
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Debug|x86.Build.0 = Debug|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|ARM.Build.0 = Release|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|ARM64.Build.0 = Release|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|x64.ActiveCfg = Release|x64
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|x64.Build.0 = Release|x64
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|x86.ActiveCfg = Release|Any CPU
+		{50F4E309-DF29-4B16-A120-271F1536900A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {46C5C542-6E76-4120-BFCB-479F915856E4}
+		SolutionGuid = {EC86AFFA-3DAF-4D21-9886-62DDF93BB959}
 	EndGlobalSection
 EndGlobal

@@ -17,7 +17,7 @@ using Polly;
 using Polly.CircuitBreaker;
 using SharpCompress.Archives;
 using SharpCompress.Archives.SevenZip;
-using SharpCompress.Readers;
+using SharpCompress.Common;
 
 namespace arma_launcher.ModService.Impl
 {
@@ -69,15 +69,12 @@ namespace arma_launcher.ModService.Impl
                         (double) Interlocked.Increment(ref validationProgress) / addons.Count * 100.0));
                 }
 
-                var validationTasks = new List<Task>();
                 mods.ForEach(mod =>
-                    validationTasks.Add(Task.Run(() =>
-                        ValidateMod(
-                            mod, addons, ValidationProgressIncrement,
-                            validFiles, updateFiles, deleteFiles,
-                            full, oldValid))));
-
-                await Task.WhenAll(validationTasks);
+                    ValidateMod(
+                        mod, addons, ValidationProgressIncrement,
+                        validFiles, updateFiles, deleteFiles,
+                        full, oldValid)
+                );
 
                 GC.Collect(); // Free memory from allocated hash's byte arrays
 
@@ -177,7 +174,7 @@ namespace arma_launcher.ModService.Impl
                 ? Directory.EnumerateFiles(modPath, "*.*", SearchOption.AllDirectories)
                 : new List<string>();
 
-            Parallel.ForEach(modFiles, file =>
+            foreach (var file in modFiles)
             {
                 var localFile = file.Substring(
                     Settings.Default.A3ModsPath.Length + 1,
@@ -200,7 +197,7 @@ namespace arma_launcher.ModService.Impl
                 {
                     deleteFiles.Add(localAddon);
                     progress();
-                    return;
+                    continue;
                 }
 
                 if (!full && oldValid != null)
@@ -220,12 +217,12 @@ namespace arma_launcher.ModService.Impl
                 {
                     validFiles.Add(localAddon);
                     progress();
-                    return;
+                    continue;
                 }
 
                 updateFiles.Add(localAddon);
                 progress();
-            });
+            }
         }
 
         private static async Task<List<Addon>> GetValid()

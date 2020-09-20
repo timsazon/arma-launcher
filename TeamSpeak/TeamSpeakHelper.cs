@@ -20,7 +20,7 @@ namespace arma_launcher
                 var teamSpeakInstaller = Path.Combine(Settings.Default.LocalFolder, "TeamSpeak3_Installer.exe");
                 var isInstallerExist = File.Exists(teamSpeakInstaller);
 
-                var accept = (bool) await DialogHost.Show(new ConfirmationDialog(
+                var accept = (bool)await DialogHost.Show(new ConfirmationDialog(
                     isInstallerExist
                         ? Resources.InstallTS
                         : $"{Resources.InstallTS} {Resources.InstallerDownloading}"));
@@ -30,10 +30,10 @@ namespace arma_launcher
                     using (var client = new WebClient())
                     {
                         button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, false);
-                        client.DownloadProgressChanged += delegate(object _, DownloadProgressChangedEventArgs args)
+                        client.DownloadProgressChanged += delegate (object _, DownloadProgressChangedEventArgs args)
                         {
                             button.SetCurrentValue(ButtonProgressAssist.ValueProperty,
-                                (double) args.ProgressPercentage);
+                                (double)args.ProgressPercentage);
                         };
                         await client.DownloadFileTaskAsync(Settings.Default.TeamSpeakUrl, teamSpeakInstaller + ".temp");
                         File.Move(teamSpeakInstaller + ".temp", teamSpeakInstaller);
@@ -47,10 +47,10 @@ namespace arma_launcher
                 if (teamSpeakDirectory == null) return;
             }
 
-            var isPluginInstalled = await IsPluginInstalled();
+            var isPluginInstalled = await IsPluginInstalled(teamSpeakDirectory);
             if (!isPluginInstalled)
             {
-                var accept = (bool) await DialogHost.Show(new ConfirmationDialog(Resources.InstallPlugin));
+                var accept = (bool)await DialogHost.Show(new ConfirmationDialog(Resources.InstallPlugin));
                 if (!accept) return;
 
                 var pluginInstaller = Path.Combine(Settings.Default.LocalFolder, "task_force_radio.ts3_plugin");
@@ -59,10 +59,10 @@ namespace arma_launcher
                     using (var client = new WebClient())
                     {
                         button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, false);
-                        client.DownloadProgressChanged += delegate(object _, DownloadProgressChangedEventArgs args)
+                        client.DownloadProgressChanged += delegate (object _, DownloadProgressChangedEventArgs args)
                         {
                             button.SetCurrentValue(ButtonProgressAssist.ValueProperty,
-                                (double) args.ProgressPercentage);
+                                (double)args.ProgressPercentage);
                         };
                         await client.DownloadFileTaskAsync(Settings.Default.TaskForcePluginUrl,
                             pluginInstaller + ".temp");
@@ -75,7 +75,11 @@ namespace arma_launcher
                 await Task.Run(() => proc?.WaitForExit());
             }
 
-            Process.Start(Settings.Default.TeamSpeakServer);
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = Settings.Default.TeamSpeakServer,
+                UseShellExecute = true
+            });
         }
 
         private static async Task<string> GetTeamSpeakDirectory()
@@ -104,9 +108,9 @@ namespace arma_launcher
             });
         }
 
-        private static async Task<bool> IsPluginInstalled()
+        private static async Task<bool> IsPluginInstalled(string teamSpeakDirectory)
         {
-            return await Task.Run(async () =>
+            return await Task.Run(() =>
             {
                 try
                 {
@@ -115,9 +119,6 @@ namespace arma_launcher
                             "plugins", "task_force_radio_win64.dll")
                     );
                     if (exist) return true;
-
-                    var teamSpeakDirectory = await GetTeamSpeakDirectory();
-                    if (teamSpeakDirectory == null) return false;
 
                     exist = File.Exists(Path.Combine(teamSpeakDirectory, "config", "plugins",
                         "task_force_radio_win64.dll"));

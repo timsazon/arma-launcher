@@ -1,11 +1,12 @@
-﻿using System.Globalization;
+﻿using System.Windows;
+using System.Globalization;
 using System.Net;
 using System.Threading;
 using arma_launcher.Properties;
 
 namespace arma_launcher
 {
-    public partial class App
+    public partial class App : Application
     {
         private App()
         {

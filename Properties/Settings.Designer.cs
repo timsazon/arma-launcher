@@ -12,7 +12,7 @@ namespace arma_launcher.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,24 +20,6 @@ namespace arma_launcher.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string FtpUser {
-            get {
-                return ((string)(this["FtpUser"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string FtpPassword {
-            get {
-                return ((string)(this["FtpPassword"]));
             }
         }
         
@@ -80,15 +62,6 @@ namespace arma_launcher.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string FtpHost {
-            get {
-                return ((string)(this["FtpHost"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string FtpPath {
             get {
                 return ((string)(this["FtpPath"]));
@@ -101,39 +74,6 @@ namespace arma_launcher.Properties {
         public string UpdateUrl {
             get {
                 return ((string)(this["UpdateUrl"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("en")]
-        public string Language {
-            get {
-                return ((string)(this["Language"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string A3WorkshopMods {
-            get {
-                return ((string)(this["A3WorkshopMods"]));
-            }
-            set {
-                this["A3WorkshopMods"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string A3Mods {
-            get {
-                return ((string)(this["A3Mods"]));
-            }
-            set {
-                this["A3Mods"] = value;
             }
         }
         
@@ -211,16 +151,6 @@ namespace arma_launcher.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://files.teamspeak-services.com/releases/client/3.3.0/TeamSpeak3-Client-win6" +
-            "4-3.3.0.exe")]
-        public string TeamSpeakUrl {
-            get {
-                return ((string)(this["TeamSpeakUrl"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/michail-nikolaev/task-force-arma-3-radio/releases/download/0.9" +
             ".12/task_force_radio.ts3_plugin")]
         public string TaskForcePluginUrl {
@@ -229,24 +159,58 @@ namespace arma_launcher.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string TeamSpeakServer {
+        [global::System.Configuration.DefaultSettingValueAttribute("60000")]
+        public int BMRefreshTime {
             get {
-                return ((string)(this["TeamSpeakServer"]));
+                return ((int)(this["BMRefreshTime"]));
             }
-            set {
-                this["TeamSpeakServer"] = value;
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://files.teamspeak-services.com/releases/client/3.5.3/TeamSpeak3-Client-win6" +
+            "4-3.5.3.exe")]
+        public string TeamSpeakUrl {
+            get {
+                return ((string)(this["TeamSpeakUrl"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string BMServerId {
+        public string FtpUser {
             get {
-                return ((string)(this["BMServerId"]));
+                return ((string)(this["FtpUser"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FtpPassword {
+            get {
+                return ((string)(this["FtpPassword"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FtpHost {
+            get {
+                return ((string)(this["FtpHost"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ru")]
+        public string Language {
+            get {
+                return ((string)(this["Language"]));
             }
         }
         
@@ -259,12 +223,48 @@ namespace arma_launcher.Properties {
             }
         }
         
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string A3WorkshopMods {
+            get {
+                return ((string)(this["A3WorkshopMods"]));
+            }
+            set {
+                this["A3WorkshopMods"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string A3Mods {
+            get {
+                return ((string)(this["A3Mods"]));
+            }
+            set {
+                this["A3Mods"] = value;
+            }
+        }
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60000")]
-        public int BMRefreshTime {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string BMServerId {
             get {
-                return ((int)(this["BMRefreshTime"]));
+                return ((string)(this["BMServerId"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string TeamSpeakServer {
+            get {
+                return ((string)(this["TeamSpeakServer"]));
+            }
+            set {
+                this["TeamSpeakServer"] = value;
             }
         }
     }

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.IO;
 using System.Reflection;
 using System.Windows.Media;
 
 namespace arma_launcher
 {
-    public static class Binding
+    public static class ResourceBinding
     {
         private static readonly Random Random = new Random();
 

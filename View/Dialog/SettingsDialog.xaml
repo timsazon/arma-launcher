@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:arma_launcher"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:p="clr-namespace:arma_launcher.Properties"
              mc:Ignorable="d">
@@ -25,7 +24,6 @@
                             Grid.Column="0"
                             Margin="8,0,0,0"
                             VerticalAlignment="Center"
-                            Style="{StaticResource MaterialDesignSubheadingTextBlock}"
                             Text="{Binding}" />
                         <Button
                             Grid.Column="2"
@@ -132,7 +130,7 @@
                     Grid.Row="7" Grid.Column="0"
                     Margin="0,20,0,0"
                     Style="{StaticResource MaterialDesignCheckBox}"
-                    IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=H, Mode=TwoWay}"
+                    IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=HugePagesFlag, Mode=TwoWay}"
                     Content="Huge Pages" />
             </Grid>
         </GroupBox>

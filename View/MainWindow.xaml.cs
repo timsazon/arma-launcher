@@ -12,7 +12,6 @@ using arma_launcher.ModService.Impl;
 using arma_launcher.Properties;
 using MaterialDesignThemes.Wpf;
 using NLog;
-using Squirrel;
 
 namespace arma_launcher
 {
@@ -32,28 +31,7 @@ namespace arma_launcher
 
         public MainWindow()
         {
-            Initialized += async delegate
-            {
-                if (Settings.Default.UpdateUrl.Length <= 0) return;
-
-                try
-                {
-                    await Task.Run(async () =>
-                    {
-                        using (var mgr = await UpdateManager.GitHubUpdateManager(Settings.Default.UpdateUrl))
-                        {
-                            await mgr.UpdateApp();
-                        }
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Logger.Error(ex, "Update");
-                }
-            };
-
             InitializeComponent();
-
             _modService = new FtpModService();
         }
 
@@ -172,7 +150,7 @@ namespace arma_launcher
 
         private async void DownloadDialog_Close(object sender, DialogClosingEventArgs e)
         {
-            if (!(bool) e.Parameter) return;
+            if (!(bool)e.Parameter) return;
 
             try
             {
@@ -245,7 +223,7 @@ namespace arma_launcher
         private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             await DialogHost.Show(new SettingsDialog(),
-                delegate(object _, DialogClosingEventArgs args) { Settings.Default.Save(); });
+                delegate (object _, DialogClosingEventArgs args) { Settings.Default.Save(); });
         }
 
         private async void TeamSpeakButton_Click(object sender, RoutedEventArgs e)
