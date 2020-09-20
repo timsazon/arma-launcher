@@ -6,21 +6,20 @@ ArmA 3 Launcher with addon validation (and downloading!) feature based on [Yoma'
 
 ## Features
 
- - Addon validation (MD5 comparison)
- - Addon downloading (FTP)
- - Settings menu (A3 path, A3 mods path and some startup parameters)
- - TeamSpeak 3 and TFAR automatic installation
- - TODO: Workshop addon validation
+- Addon validation (MD5 comparison)
+- Addon downloading (FTP)
+- Settings menu (A3 path, A3 mods path and some startup parameters)
+- TeamSpeak 3 and TFAR automatic installation
 
 ## Building
 
 1. If you want to localize it, just copy Resources.resx to Resources.de.resx (in case of German) and translate the values.
 
-2. Build Release
+2. Open App.config in the root folder and set missing params.
 
-3. Open arma-launcher.exe.config in the build folder and set FTP, UpdateUrl and Language params.
+3. Build Release
 
-4. Package it by [Squirrel.Windows](https://github.com/Squirrel/Squirrel.Windows).
+4. Publish it (e.g. NET Core's single-file or MSIX installer)
 
 ## License and Usage
 
