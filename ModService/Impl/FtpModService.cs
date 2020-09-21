@@ -24,6 +24,7 @@ namespace arma_launcher.ModService.Impl
     internal class FtpModService : IModService
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly MD5 md5 = MD5.Create();
 
         private readonly NetworkCredential _networkCredential;
         private FtpClient _client;
@@ -330,14 +331,11 @@ namespace arma_launcher.ModService.Impl
 
         private static string CalculateMd5(string fileName, long fileLength)
         {
-            using (var md5 = MD5.Create())
+            using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite,
+                (int) Math.Min(8 * 1024 * 1024, fileLength)))
             {
-                using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite,
-                    (int) Math.Min(8 * 1024 * 1024, fileLength)))
-                {
-                    var hash = md5.ComputeHash(stream);
-                    return BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
-                }
+                var hash = md5.ComputeHash(stream);
+                return BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
             }
         }
     }
