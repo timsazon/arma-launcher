@@ -150,7 +150,7 @@ namespace arma_launcher
 
         private async void DownloadDialog_Close(object sender, DialogClosingEventArgs e)
         {
-            if (!(bool)e.Parameter) return;
+            if (!(bool) e.Parameter) return;
 
             try
             {
@@ -223,7 +223,7 @@ namespace arma_launcher
         private async void SettingsButton_Click(object sender, RoutedEventArgs e)
         {
             await DialogHost.Show(new SettingsDialog(),
-                delegate (object _, DialogClosingEventArgs args) { Settings.Default.Save(); });
+                delegate(object _, DialogClosingEventArgs args) { Settings.Default.Save(); });
         }
 
         private async void TeamSpeakButton_Click(object sender, RoutedEventArgs e)

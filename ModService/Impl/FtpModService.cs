@@ -332,7 +332,7 @@ namespace arma_launcher.ModService.Impl
         private static string CalculateMd5(string fileName, long fileLength)
         {
             using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite,
-                (int) Math.Min(8 * 1024 * 1024, fileLength)))
+                (int) Math.Min(64 * 1024, fileLength)))
             {
                 var hash = md5.ComputeHash(stream);
                 return BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();

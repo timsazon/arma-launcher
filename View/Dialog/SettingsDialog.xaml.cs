@@ -24,7 +24,7 @@ namespace arma_launcher
 
         private void A3ModsPathButton_Click(object sender, RoutedEventArgs e)
         {
-            using (var dialog = new CommonOpenFileDialog { IsFolderPicker = true })
+            using (var dialog = new CommonOpenFileDialog {IsFolderPicker = true})
             {
                 if (dialog.ShowDialog() != CommonFileDialogResult.Ok) return;
 

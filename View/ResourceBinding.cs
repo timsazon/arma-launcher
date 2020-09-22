@@ -18,6 +18,7 @@ namespace arma_launcher
             }
         }
 
-        public static string GetTitle => Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title;
+        public static string GetTitle =>
+            Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title;
     }
 }

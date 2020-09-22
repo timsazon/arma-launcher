@@ -27,7 +27,8 @@ namespace arma_launcher.ModService
 
         public string FileName { get; set; }
 
-        public ProgressMessage(Status status, double totalProgress = -1, double progress = -1, double transferSpeed = 0, TimeSpan remainingTime = default, string fileName = default)
+        public ProgressMessage(Status status, double totalProgress = -1, double progress = -1, double transferSpeed = 0,
+            TimeSpan remainingTime = default, string fileName = default)
         {
             ProgressStatus = status;
             TotalProgress = totalProgress;
