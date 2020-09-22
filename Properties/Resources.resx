@@ -223,4 +223,7 @@
   <data name="InstallTS" xml:space="preserve">
     <value>Install TeamSpeak 3?</value>
   </data>
+  <data name="TeamSpeakTooltip" xml:space="preserve">
+    <value>Install/run TeamSpeak 3</value>
+  </data>
 </root>

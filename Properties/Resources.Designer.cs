@@ -334,6 +334,15 @@ namespace arma_launcher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install/run TeamSpeak 3.
+        /// </summary>
+        public static string TeamSpeakTooltip {
+            get {
+                return ResourceManager.GetString("TeamSpeakTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string UpdateFiles {

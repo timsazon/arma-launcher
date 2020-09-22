@@ -20,7 +20,7 @@ namespace arma_launcher
                 var teamSpeakInstaller = Path.Combine(Settings.Default.LocalFolder, "TeamSpeak3_Installer.exe");
                 var isInstallerExist = File.Exists(teamSpeakInstaller);
 
-                var accept = (bool)await DialogHost.Show(new ConfirmationDialog(
+                var accept = (bool) await DialogHost.Show(new ConfirmationDialog(
                     isInstallerExist
                         ? Resources.InstallTS
                         : $"{Resources.InstallTS} {Resources.InstallerDownloading}"));
@@ -30,10 +30,10 @@ namespace arma_launcher
                     using (var client = new WebClient())
                     {
                         button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, false);
-                        client.DownloadProgressChanged += delegate (object _, DownloadProgressChangedEventArgs args)
+                        client.DownloadProgressChanged += delegate(object _, DownloadProgressChangedEventArgs args)
                         {
                             button.SetCurrentValue(ButtonProgressAssist.ValueProperty,
-                                (double)args.ProgressPercentage);
+                                (double) args.ProgressPercentage);
                         };
                         await client.DownloadFileTaskAsync(Settings.Default.TeamSpeakUrl, teamSpeakInstaller + ".temp");
                         File.Move(teamSpeakInstaller + ".temp", teamSpeakInstaller);
@@ -41,7 +41,12 @@ namespace arma_launcher
                         button.SetCurrentValue(ButtonProgressAssist.ValueProperty, -1.0);
                     }
 
-                var proc = Process.Start(teamSpeakInstaller);
+                var proc =
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = teamSpeakInstaller,
+                        UseShellExecute = true
+                    });
                 await Task.Run(() => proc?.WaitForExit());
                 teamSpeakDirectory = await GetTeamSpeakDirectory();
                 if (teamSpeakDirectory == null) return;
@@ -50,7 +55,7 @@ namespace arma_launcher
             var isPluginInstalled = await IsPluginInstalled(teamSpeakDirectory);
             if (!isPluginInstalled)
             {
-                var accept = (bool)await DialogHost.Show(new ConfirmationDialog(Resources.InstallPlugin));
+                var accept = (bool) await DialogHost.Show(new ConfirmationDialog(Resources.InstallPlugin));
                 if (!accept) return;
 
                 var pluginInstaller = Path.Combine(Settings.Default.LocalFolder, "task_force_radio.ts3_plugin");
@@ -59,10 +64,10 @@ namespace arma_launcher
                     using (var client = new WebClient())
                     {
                         button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, false);
-                        client.DownloadProgressChanged += delegate (object _, DownloadProgressChangedEventArgs args)
+                        client.DownloadProgressChanged += delegate(object _, DownloadProgressChangedEventArgs args)
                         {
                             button.SetCurrentValue(ButtonProgressAssist.ValueProperty,
-                                (double)args.ProgressPercentage);
+                                (double) args.ProgressPercentage);
                         };
                         await client.DownloadFileTaskAsync(Settings.Default.TaskForcePluginUrl,
                             pluginInstaller + ".temp");
@@ -71,7 +76,12 @@ namespace arma_launcher
                         button.SetCurrentValue(ButtonProgressAssist.ValueProperty, -1.0);
                     }
 
-                var proc = Process.Start(pluginInstaller);
+                var proc =
+                    Process.Start(new ProcessStartInfo
+                    {
+                        FileName = pluginInstaller,
+                        UseShellExecute = true
+                    });
                 await Task.Run(() => proc?.WaitForExit());
             }
 
