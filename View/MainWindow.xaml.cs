@@ -15,7 +15,7 @@ using NLog;
 
 namespace arma_launcher
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
@@ -185,16 +185,52 @@ namespace arma_launcher
             _cancellationTokenSource?.Cancel();
         }
 
-        private void PlayButton_Click(object sender, RoutedEventArgs e)
+        private async void PlayButton_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                var uninstalledWorkshopMods = new List<string>();
+                var uninstalledMods = new List<string>();
+
                 var workshopMods = Settings.Default.A3WorkshopMods.Split(';');
                 var mods = Settings.Default.A3Mods.Split(';').Select(mod =>
-                        workshopMods.Contains(mod)
-                            ? Path.Combine(Settings.Default.A3Path, "!Workshop", mod)
-                            : Path.Combine(Settings.Default.A3ModsPath, mod))
-                    .ToList();
+                {
+                    var path = workshopMods.Contains(mod)
+                        ? Path.Combine(Settings.Default.A3Path, "!Workshop", mod)
+                        : Path.Combine(Settings.Default.A3ModsPath, mod);
+
+                    if (Directory.Exists(path)) return path;
+
+                    if (workshopMods.Contains(mod))
+                    {
+                        uninstalledWorkshopMods.Add(mod);
+                    }
+                    else
+                    {
+                        uninstalledMods.Add(mod);
+                    }
+
+                    return path;
+                }).ToList();
+
+                if (uninstalledMods.Count > 0 || uninstalledWorkshopMods.Count > 0)
+                {
+                    var message = $"{Properties.Resources.MissingMods}\n";
+
+                    if (uninstalledMods.Count > 0)
+                    {
+                        message += $"{Properties.Resources.ProjectMods}: {string.Join(", ", uninstalledMods)}\n";
+                    }
+
+                    if (uninstalledWorkshopMods.Count > 0)
+                    {
+                        message +=
+                            $"{Properties.Resources.WorkshopMods}: {string.Join(", ", uninstalledWorkshopMods)}\n";
+                    }
+
+                    await DialogHost.Show(new WarningDialog(message));
+                    return;
+                }
 
                 var a3Exe = Path.Combine(Settings.Default.A3Path, "arma3battleye.exe");
 

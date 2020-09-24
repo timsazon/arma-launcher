@@ -289,6 +289,15 @@ namespace arma_launcher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to install the following mods.
+        /// </summary>
+        public static string MissingMods {
+            get {
+                return ResourceManager.GetString("MissingMods", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New.
         /// </summary>
         public static string NewFiles {
@@ -312,6 +321,15 @@ namespace arma_launcher.Properties {
         public static string Play {
             get {
                 return ResourceManager.GetString("Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Project.
+        /// </summary>
+        public static string ProjectMods {
+            get {
+                return ResourceManager.GetString("ProjectMods", resourceCulture);
             }
         }
         
@@ -393,6 +411,15 @@ namespace arma_launcher.Properties {
         public static string Validating {
             get {
                 return ResourceManager.GetString("Validating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Workshop.
+        /// </summary>
+        public static string WorkshopMods {
+            get {
+                return ResourceManager.GetString("WorkshopMods", resourceCulture);
             }
         }
     }

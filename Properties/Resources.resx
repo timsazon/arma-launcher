@@ -226,4 +226,13 @@
   <data name="TeamSpeakTooltip" xml:space="preserve">
     <value>Install/run TeamSpeak 3</value>
   </data>
+  <data name="MissingMods" xml:space="preserve">
+    <value>You need to install the following mods</value>
+  </data>
+  <data name="ProjectMods" xml:space="preserve">
+    <value>Project</value>
+  </data>
+  <data name="WorkshopMods" xml:space="preserve">
+    <value>Workshop</value>
+  </data>
 </root>

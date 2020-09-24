@@ -226,4 +226,13 @@
   <data name="TeamSpeakTooltip" xml:space="preserve">
     <value>Установить/запустить TeamSpeak 3</value>
   </data>
+  <data name="MissingMods" xml:space="preserve">
+    <value>Отсутствуют необходимые моды</value>
+  </data>
+  <data name="ProjectMods" xml:space="preserve">
+    <value>Проект</value>
+  </data>
+  <data name="WorkshopMods" xml:space="preserve">
+    <value>Мастерская</value>
+  </data>
 </root>
