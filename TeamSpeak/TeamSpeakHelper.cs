@@ -87,7 +87,7 @@ namespace arma_launcher
 
             Process.Start(new ProcessStartInfo
             {
-                FileName = Settings.Default.TeamSpeakServer,
+                FileName = $"ts3server://{Settings.Default.TeamSpeakAddress}",
                 UseShellExecute = true
             });
         }

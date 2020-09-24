@@ -235,4 +235,13 @@
   <data name="WorkshopMods" xml:space="preserve">
     <value>Workshop</value>
   </data>
+  <data name="FtpAddress" xml:space="preserve">
+    <value>FTP Address</value>
+  </data>
+  <data name="InvalidAddress" xml:space="preserve">
+    <value>Invalid Address</value>
+  </data>
+  <data name="TeamSpeakAddress" xml:space="preserve">
+    <value>TeamSpeak Address</value>
+  </data>
 </root>

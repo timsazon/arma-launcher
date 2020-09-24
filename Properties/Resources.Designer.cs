@@ -262,6 +262,15 @@ namespace arma_launcher.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FTP Address.
+        /// </summary>
+        public static string FtpAddress {
+            get {
+                return ResourceManager.GetString("FtpAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Installer will be downloaded in background then installation begins.
         /// </summary>
         public static string InstallerDownloading {
@@ -285,6 +294,15 @@ namespace arma_launcher.Properties {
         public static string InstallTS {
             get {
                 return ResourceManager.GetString("InstallTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Address.
+        /// </summary>
+        public static string InvalidAddress {
+            get {
+                return ResourceManager.GetString("InvalidAddress", resourceCulture);
             }
         }
         
@@ -348,6 +366,15 @@ namespace arma_launcher.Properties {
         public static string StopDownloadTooltip {
             get {
                 return ResourceManager.GetString("StopDownloadTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TeamSpeak Address.
+        /// </summary>
+        public static string TeamSpeakAddress {
+            get {
+                return ResourceManager.GetString("TeamSpeakAddress", resourceCulture);
             }
         }
         

@@ -24,9 +24,10 @@ namespace arma_launcher.ModService.Impl
     internal class FtpModService : IModService
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        private static readonly MD5 md5 = MD5.Create();
+        private static readonly MD5 Md5 = MD5.Create();
 
-        private readonly NetworkCredential _networkCredential;
+        private Uri _ftpUri;
+        private NetworkCredential _networkCredential;
         private FtpClient _client;
 
         public FtpModService()
@@ -35,14 +36,14 @@ namespace arma_launcher.ModService.Impl
             FtpTrace.LogPassword = false;
             FtpTrace.LogIP = false;
             FtpTrace.LogFunctions = false;
-
-            _networkCredential = new NetworkCredential(Settings.Default.FtpUser, Settings.Default.FtpPassword);
         }
 
         public async Task<(IEnumerable<Addon>, IEnumerable<Addon>, IEnumerable<Addon>, IEnumerable<Addon>)> Validate(
             bool full, IProgress<ProgressMessage> progress)
         {
-            using (_client = new FtpClient(Settings.Default.FtpHost, _networkCredential))
+            UpdateConnectionInfo();
+            
+            using (_client = new FtpClient(_ftpUri.Host, _networkCredential))
             {
                 progress.Report(new ProgressMessage(ProgressMessage.Status.Connecting));
 
@@ -106,7 +107,7 @@ namespace arma_launcher.ModService.Impl
                 (exception, _) => Logger.Error(exception, "Download")
             );
 
-            using (_client = new FtpClient(Settings.Default.FtpHost, _networkCredential))
+            using (_client = new FtpClient(_ftpUri.Host, _networkCredential))
             {
                 var totalProgress = 0.0;
                 var totalSize = downloadFiles.Sum(a => a.Size);
@@ -116,7 +117,10 @@ namespace arma_launcher.ModService.Impl
                 foreach (var addon in downloadFiles)
                 {
                     var path = Path.Combine(Settings.Default.A3ModsPath, addon.Url);
-                    var remotePath = Path.Combine(Settings.Default.FtpPath, addon.Url);
+                    var remotePath =
+                        Path.Combine(
+                            _ftpUri.AbsolutePath.Remove(_ftpUri.AbsolutePath.Length - _ftpUri.Segments.Last().Length),
+                            addon.Url);
 
                     File.Delete(path);
 
@@ -156,13 +160,28 @@ namespace arma_launcher.ModService.Impl
 
         private async Task FetchAutoconfig()
         {
-            await _client.SetWorkingDirectoryAsync(Settings.Default.FtpPath);
+            await _client.SetWorkingDirectoryAsync(
+                _ftpUri.AbsolutePath.Remove(_ftpUri.AbsolutePath.Length - _ftpUri.Segments.Last().Length));
             await _client.DownloadFileAsync(
-                Path.Combine(Settings.Default.LocalFolder, "md5", "autoconfig.7z"),
-                "autoconfig.7z", FtpLocalExists.Overwrite
+                Path.Combine(Settings.Default.LocalFolder, "md5", _ftpUri.Segments.Last()),
+                _ftpUri.Segments.Last(), FtpLocalExists.Overwrite
             );
 
-            await Task.Run(() => UnpackFile(Path.Combine(Settings.Default.LocalFolder, "md5", "autoconfig.7z")));
+            await Task.Run(() =>
+                UnpackFile(Path.Combine(Settings.Default.LocalFolder, "md5", _ftpUri.Segments.Last())));
+        }
+
+        private void UpdateConnectionInfo()
+        {
+            _ftpUri = new Uri(Settings.Default.FtpUri);
+
+            var userName = string.Empty;
+            var password = string.Empty;
+            var items = _ftpUri.UserInfo.Split(':');
+            if (items.Length > 0) userName = items[0];
+            if (items.Length > 1) password = items[1];
+
+            _networkCredential = new NetworkCredential(userName, password);
         }
 
         private static void ValidateMod(string mod, List<Addon> addons, Action progress,
@@ -334,7 +353,7 @@ namespace arma_launcher.ModService.Impl
             using (var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.ReadWrite,
                 (int) Math.Min(64 * 1024, fileLength)))
             {
-                var hash = md5.ComputeHash(stream);
+                var hash = Md5.ComputeHash(stream);
                 return BitConverter.ToString(hash).Replace("-", "").ToUpperInvariant();
             }
         }

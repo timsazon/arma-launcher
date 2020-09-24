@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:p="clr-namespace:arma_launcher.Properties"
+             xmlns:armaLauncher="clr-namespace:arma_launcher"
              mc:Ignorable="d">
     <Grid>
         <GroupBox
@@ -56,6 +57,8 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBox
                     Grid.Row="0"
@@ -96,38 +99,66 @@
                         Height="24"
                         Width="24" />
                 </Button>
+                <TextBox
+                    Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="{x:Static p:Resources.FtpAddress}"
+                    materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0">
+                    <TextBox.Text>
+                        <Binding Source="{x:Static p:Settings.Default}" Path="FtpUri" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <armaLauncher:FtpValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox
+                    Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,20,0,0"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                    materialDesign:HintAssist.Hint="{x:Static p:Resources.TeamSpeakAddress}"
+                    materialDesign:TextFieldAssist.TextBoxViewMargin="1 0 1 0">
+                    <TextBox.Text>
+                        <Binding Source="{x:Static p:Settings.Default}" Path="TeamSpeakAddress" Mode="TwoWay">
+                            <Binding.ValidationRules>
+                                <armaLauncher:TeamSpeakValidationRule ValidatesOnTargetUpdated="True" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <CheckBox
-                    Grid.Row="2" Grid.Column="0"
+                    Grid.Row="4" Grid.Column="0"
                     Margin="0,20,0,0"
                     Style="{StaticResource MaterialDesignCheckBox}"
                     IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=WindowFlag, Mode=TwoWay}"
                     Content="Window" />
                 <CheckBox
-                    Grid.Row="3" Grid.Column="0"
+                    Grid.Row="5" Grid.Column="0"
                     Margin="0,20,0,0"
                     Style="{StaticResource MaterialDesignCheckBox}"
                     IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=NoSplashFlag, Mode=TwoWay}"
                     Content="No Splash" />
                 <CheckBox
-                    Grid.Row="4" Grid.Column="0"
+                    Grid.Row="6" Grid.Column="0"
                     Margin="0,20,0,0"
                     Style="{StaticResource MaterialDesignCheckBox}"
                     IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=SkipIntroFlag, Mode=TwoWay}"
                     Content="Skip Intro" />
                 <CheckBox
-                    Grid.Row="5" Grid.Column="0"
+                    Grid.Row="7" Grid.Column="0"
                     Margin="0,20,0,0"
                     Style="{StaticResource MaterialDesignCheckBox}"
                     IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=NoLogsFlag, Mode=TwoWay}"
                     Content="No Logs" />
                 <CheckBox
-                    Grid.Row="6" Grid.Column="0"
+                    Grid.Row="8" Grid.Column="0"
                     Margin="0,20,0,0"
                     Style="{StaticResource MaterialDesignCheckBox}"
                     IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=EnableHTFlag, Mode=TwoWay}"
                     Content="Enable HT" />
                 <CheckBox
-                    Grid.Row="7" Grid.Column="0"
+                    Grid.Row="9" Grid.Column="0"
                     Margin="0,20,0,0"
                     Style="{StaticResource MaterialDesignCheckBox}"
                     IsChecked="{Binding Source={x:Static p:Settings.Default}, Path=HugePagesFlag, Mode=TwoWay}"

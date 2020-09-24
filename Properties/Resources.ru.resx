@@ -235,4 +235,13 @@
   <data name="WorkshopMods" xml:space="preserve">
     <value>Мастерская</value>
   </data>
+  <data name="FtpAddress" xml:space="preserve">
+    <value>Адрес FTP</value>
+  </data>
+  <data name="InvalidAddress" xml:space="preserve">
+    <value>Некорректный адрес</value>
+  </data>
+  <data name="TeamSpeakAddress" xml:space="preserve">
+    <value>Адрес TeamSpeak</value>
+  </data>
 </root>
