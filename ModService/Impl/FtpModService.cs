@@ -42,7 +42,7 @@ namespace arma_launcher.ModService.Impl
             bool full, IProgress<ProgressMessage> progress)
         {
             UpdateConnectionInfo();
-            
+
             using (_client = new FtpClient(_ftpUri.Host, _networkCredential))
             {
                 progress.Report(new ProgressMessage(ProgressMessage.Status.Connecting));
@@ -122,7 +122,10 @@ namespace arma_launcher.ModService.Impl
                             _ftpUri.AbsolutePath.Remove(_ftpUri.AbsolutePath.Length - _ftpUri.Segments.Last().Length),
                             addon.Url);
 
-                    File.Delete(path);
+                    if (File.Exists(path))
+                    {
+                        File.Delete(path);
+                    }
 
                     var total = totalProgress;
                     var ftpProgress = new Progress<FtpProgress>(v =>
@@ -345,7 +348,10 @@ namespace arma_launcher.ModService.Impl
                     });
             }
 
-            File.Delete(path);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
         }
 
         private static string CalculateMd5(string fileName, long fileLength)

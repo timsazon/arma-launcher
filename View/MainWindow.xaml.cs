@@ -150,10 +150,10 @@ namespace arma_launcher
 
         private async void DownloadDialog_Close(object sender, DialogClosingEventArgs e)
         {
-            if (!(bool) e.Parameter) return;
-
             try
             {
+                if (!(bool) e.Parameter) return;
+
                 foreach (var file in _validationInfo.deleteFiles)
                     File.Delete(Path.Combine(Settings.Default.A3ModsPath, file.Path, file.Pbo));
 
