@@ -155,7 +155,11 @@ namespace arma_launcher
                 if (!(bool) e.Parameter) return;
 
                 foreach (var file in _validationInfo.deleteFiles)
-                    File.Delete(Path.Combine(Settings.Default.A3ModsPath, file.Path, file.Pbo));
+                {
+                    var path = Path.Combine(Settings.Default.A3ModsPath, file.Path, file.Pbo);
+                    File.SetAttributes(path, FileAttributes.Normal);
+                    File.Delete(path);
+                }
 
                 DownloadCancelButton.Visibility = Visibility.Visible;
                 _cancellationTokenSource = new CancellationTokenSource();
@@ -168,7 +172,15 @@ namespace arma_launcher
             }
             catch (Exception ex)
             {
-                if (!_cancellationTokenSource.IsCancellationRequested)
+                if (_cancellationTokenSource != null)
+                {
+                    if (!_cancellationTokenSource.IsCancellationRequested)
+                    {
+                        Snackbar.MessageQueue.Enqueue($"{Properties.Resources.Error}: {ex.Message}");
+                        Logger.Error(ex, "Download");
+                    }
+                }
+                else
                 {
                     Snackbar.MessageQueue.Enqueue($"{Properties.Resources.Error}: {ex.Message}");
                     Logger.Error(ex, "Download");
