@@ -5,10 +5,11 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using arma_launcher.Properties;
+using arma_launcher.View.Dialog;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 
-namespace arma_launcher
+namespace arma_launcher.TeamSpeak
 {
     public static class TeamSpeakHelper
     {
@@ -61,20 +62,20 @@ namespace arma_launcher
                 var pluginInstaller = Path.Combine(Settings.Default.LocalFolder, "task_force_radio.ts3_plugin");
 
                 if (!File.Exists(pluginInstaller))
-                    using (var client = new WebClient())
+                {
+                    using var client = new WebClient();
+                    button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, false);
+                    client.DownloadProgressChanged += delegate(object _, DownloadProgressChangedEventArgs args)
                     {
-                        button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, false);
-                        client.DownloadProgressChanged += delegate(object _, DownloadProgressChangedEventArgs args)
-                        {
-                            button.SetCurrentValue(ButtonProgressAssist.ValueProperty,
-                                (double) args.ProgressPercentage);
-                        };
-                        await client.DownloadFileTaskAsync(Settings.Default.TaskForcePluginUrl,
-                            pluginInstaller + ".temp");
-                        File.Move(pluginInstaller + ".temp", pluginInstaller);
-                        button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, true);
-                        button.SetCurrentValue(ButtonProgressAssist.ValueProperty, -1.0);
-                    }
+                        button.SetCurrentValue(ButtonProgressAssist.ValueProperty,
+                            (double) args.ProgressPercentage);
+                    };
+                    await client.DownloadFileTaskAsync(Settings.Default.TaskForcePluginUrl,
+                        pluginInstaller + ".temp");
+                    File.Move(pluginInstaller + ".temp", pluginInstaller);
+                    button.SetCurrentValue(ButtonProgressAssist.IsIndeterminateProperty, true);
+                    button.SetCurrentValue(ButtonProgressAssist.ValueProperty, -1.0);
+                }
 
                 var proc =
                     Process.Start(new ProcessStartInfo

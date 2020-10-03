@@ -1,8 +1,6 @@
-﻿using System.Windows.Controls;
-
-namespace arma_launcher
+﻿namespace arma_launcher.View.Dialog
 {
-    public partial class ConfirmationDialog : UserControl
+    public partial class ConfirmationDialog
     {
         public ConfirmationDialog(string message)
         {

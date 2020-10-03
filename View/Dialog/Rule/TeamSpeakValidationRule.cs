@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using arma_launcher.Properties;
 
-namespace arma_launcher
+namespace arma_launcher.View.Dialog.Rule
 {
     public class TeamSpeakValidationRule : ValidationRule
     {

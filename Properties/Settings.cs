@@ -4,14 +4,14 @@ using System.IO;
 
 namespace arma_launcher.Properties
 {
-
     internal sealed partial class Settings
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         private Settings()
         {
-            LocalFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), LocalFolder);
+            LocalFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                LocalFolder);
 
             try
             {

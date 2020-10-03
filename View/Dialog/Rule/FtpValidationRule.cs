@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Windows.Controls;
 using arma_launcher.Properties;
 
-namespace arma_launcher
+namespace arma_launcher.View.Dialog.Rule
 {
     public class FtpValidationRule : ValidationRule
     {
@@ -15,6 +15,7 @@ namespace arma_launcher
             {
                 return new ValidationResult(false, Resources.InvalidAddress);
             }
+
             return ValidationResult.ValidResult;
         }
     }

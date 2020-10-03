@@ -1,4 +1,4 @@
-﻿<Window x:Class="arma_launcher.MainWindow"
+﻿<Window x:Class="arma_launcher.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -12,10 +12,11 @@
         xmlns:local="clr-namespace:arma_launcher"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:p="clr-namespace:arma_launcher.Properties"
+        xmlns:view="clr-namespace:arma_launcher.View"
         mc:Ignorable="d"
-        Title="{x:Static local:ResourceBinding.GetTitle}" MinWidth="800" MinHeight="450" Width="1100" Height="800">
+        Title="{x:Static view:ResourceBinding.GetTitle}" MinWidth="800" MinHeight="450" Width="1100" Height="800">
     <Window.Background>
-        <ImageBrush ImageSource="{x:Static local:ResourceBinding.RandomImage}" Stretch="UniformToFill" />
+        <ImageBrush ImageSource="{x:Static view:ResourceBinding.RandomImage}" Stretch="UniformToFill" />
     </Window.Background>
     <Window.TaskbarItemInfo>
         <TaskbarItemInfo />
@@ -45,7 +46,7 @@
                         VerticalAlignment="Top"
                         HorizontalAlignment="Center"
                         Margin="0,20,0,0">
-                        <local:ServerStatus
+                        <view:ServerStatus
                             Id="{Binding Source={x:Static p:Settings.Default}, Path=BMServerId}" />
                     </StackPanel>
                     <Button

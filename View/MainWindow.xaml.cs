@@ -10,10 +10,12 @@ using System.Windows.Shell;
 using arma_launcher.ModService;
 using arma_launcher.ModService.Impl;
 using arma_launcher.Properties;
+using arma_launcher.TeamSpeak;
+using arma_launcher.View.Dialog;
 using MaterialDesignThemes.Wpf;
 using NLog;
 
-namespace arma_launcher
+namespace arma_launcher.View
 {
     public partial class MainWindow
     {
@@ -84,22 +86,14 @@ namespace arma_launcher
                     }
                 }
 
-                switch (v.ProgressStatus)
+                ProgressBarMessage.Text = v.ProgressStatus switch
                 {
-                    case ProgressMessage.Status.Connecting:
-                        ProgressBarMessage.Text = Properties.Resources.Connecting;
-                        break;
-                    case ProgressMessage.Status.Validating:
-                        ProgressBarMessage.Text = Properties.Resources.Validating;
-                        break;
-                    case ProgressMessage.Status.Downloading:
-                        ProgressBarMessage.Text =
-                            $"{Properties.Resources.Downloading} {v.FileName} ({v.TransferSpeedToString()}), {Properties.Resources.ETA} ~{v.ETA:hh\\:mm\\:ss}";
-                        break;
-                    default:
-                        ProgressBarMessage.Text = "";
-                        break;
-                }
+                    ProgressMessage.Status.Connecting => Properties.Resources.Connecting,
+                    ProgressMessage.Status.Validating => Properties.Resources.Validating,
+                    ProgressMessage.Status.Downloading =>
+                        $"{Properties.Resources.Downloading} {v.FileName} ({v.TransferSpeedToString()}), {Properties.Resources.ETA} ~{v.ETA:hh\\:mm\\:ss}",
+                    _ => ""
+                };
             });
         }
 

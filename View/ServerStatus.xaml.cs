@@ -3,13 +3,12 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Timers;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using arma_launcher.Properties;
 using Newtonsoft.Json;
 using NLog;
 
-namespace arma_launcher
+namespace arma_launcher.View
 {
     public class ServerInfo
     {
@@ -31,7 +30,7 @@ namespace arma_launcher
         }
     }
 
-    public partial class ServerStatus : UserControl
+    public partial class ServerStatus
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 

@@ -18,8 +18,7 @@
                 IsCancel="True"
                 Margin="8 20 8 0"
                 Command="materialDesign:DialogHost.CloseDialogCommand"
-                Content="OK">
-            </Button>
+                Content="OK" />
         </StackPanel>
     </StackPanel>
 </UserControl>

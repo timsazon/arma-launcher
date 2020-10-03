@@ -4,9 +4,9 @@ using System.IO;
 using System.Windows.Controls;
 using arma_launcher.ModService;
 
-namespace arma_launcher
+namespace arma_launcher.View.Dialog
 {
-    public partial class DownloadDialog : UserControl
+    public partial class DownloadDialog
     {
         public DownloadDialog(
             (IEnumerable<Addon> validFiles, IEnumerable<Addon> updateFiles, IEnumerable<Addon> newFiles,

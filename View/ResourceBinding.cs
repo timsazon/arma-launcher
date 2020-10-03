@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Windows.Media;
 
-namespace arma_launcher
+namespace arma_launcher.View
 {
     public static class ResourceBinding
     {
@@ -19,6 +19,6 @@ namespace arma_launcher
         }
 
         public static string GetTitle =>
-            Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>().Title;
+            Assembly.GetExecutingAssembly().GetCustomAttribute<AssemblyTitleAttribute>()?.Title;
     }
 }
